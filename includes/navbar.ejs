@@ -1,0 +1,161 @@
+
+
+
+
+<style>
+  .search-btn{
+    background-color:#fe424d;
+    color: white;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+  }
+  
+  .search-btn:hover{
+    background-color:#fe424d;
+    color: white;
+  }
+  .search-btn i{
+    display: inline;
+    margin-right: 0.5rem;
+  }
+
+  .search-inp{
+    border-radius: 25px;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+    
+  }
+
+</style>
+
+<nav class="navbar navbar-expand-md bg-light shadow-sm py-3  sticky-top">
+  <div class="container-fluid ms-4" >
+    <!-- Brand Logo -->
+    <a id="nm" class="navbar-brand fw-bold" href="/listings" style="font-size: 1.5rem;">
+      <i class="fa-solid fa-plane-departure"></i>
+      &nbsp; 
+    </a>
+
+    <!-- Toggler Button for Mobile -->
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <!-- Left-Aligned Links -->
+      <div class="navbar-nav me-auto">
+       
+        <a class="nav-link px-1" id="exp" href="/listings">Explore</a>
+   </div>
+
+   <div class="navbar-nav  me-auto"> 
+    <form class="d-flex" role="search">
+      <input class="form-control me-2 search-inp"  type="search" placeholder="Search destinations" >
+      <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+    </form>
+
+   </div>
+
+      <!-- Right-Aligned Links -->
+      <div class="navbar-nav me-4">
+        <a class="nav-link px-2" href="/listings/new">Add New Listing</a>
+        <%  if(!currentUser) { %>                                 <!--Ab ye req.user hum sidhe yaha ejs mai use nahi kar sakte ,,, ye krne ke liye hame req.user ko local variable mai store kara lete hai , kyuki locals ki chijo ko hum kisi bhi aur file mai use kar sakte hai  -->
+       <a class="nav-link  px-2" href="/login"> <b>Log In</b> </a>   
+        <b> <a class="nav-link px-2" href="/signup"> <b>Sign Up</b> </a>  
+          <% } %>
+          <% if(currentUser) { %>
+              <i class="fa-solid fa-user mt-3" ></i>
+              <a class="nav-link px-2 mt-1" href="/logout">Logout</a>
+        <%  } %>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">  <i class="fa-solid fa-plane-departure"></i>  </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link"  href="/">Home</a>
+          <a class="nav-link" href="/listings">All Listings</a>
+          <a class="nav-link" href="/listings/new">Add new Listing</a>
+         
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+
+ -->
+
+
+
+ <!--
+ <nav class="navbar navbar-expand-md bg-light shadow-sm py-3  sticky-top ">
+  <div class="container">
+     Brand Logo 
+    <a id="nm" class="navbar-brand fw-bold " href="/" style="font-size: 1.5rem;">
+      <i class="fa-solid fa-plane-departure"></i>
+     &nbsp;  StaySphere
+    </a>
+
+     Toggler Button for Mobile 
+     
+     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     Navbar Links 
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ms-auto ">
+        <a class="nav-link  px-3" class="headings" href="/" >Home</a>
+        <a class="nav-link  px-3"   class="headings"      href="/listings">All Listings</a>
+        <a class="nav-link  px-3"   class="headings"        href="/listings/new">Add New Listing</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<br>
+ 
+ -->

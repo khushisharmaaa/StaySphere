@@ -1,0 +1,120 @@
+<%- layout("../layouts/boilerplate") %>
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card shadow-lg" style="width: 28rem; margin-bottom: 5rem; border-radius: 15px;">
+    <!-- Card Header -->
+    <div class="card-header text-white text-center" 
+         style="background: linear-gradient(90deg, #6a11cb, #2575fc); border-radius: 15px 15px 0 0; padding: 20px;">
+      <h2 class="mb-1">Login</h2>
+      <p class="mb-0">Welcome back! Login to continue your journey.</p>
+    </div>
+
+    <!-- Card Body -->
+    <div class="card-body p-4">
+      <form action="/login" method="POST" class="needs-validation" novalidate>
+        <!-- Username -->
+        <div class="mb-4">
+          <label for="username" class="form-label">Username</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
+            <input name="username" id="username" type="text" class="form-control" placeholder="Enter your username" required>
+          </div>
+          <div class="invalid-feedback">
+            Please enter a username.
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-4">
+          <label for="password" class="form-label">Password</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-lock"></i></span>
+            <input name="password" id="password" type="password" class="form-control" s placeholder="Enter your password" required>
+          </div>
+          <div class="invalid-feedback">
+            Please enter a password.
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button class="btn btn-primary btn-lg shadow-sm" type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Card Footer -->
+    <div class="card-footer text-center text-muted" style="border-radius: 0 0 15px 15px; padding: 15px;">
+      Don't have an account? <a href="/signup" class="text-primary text-decoration-none fw-bold">Sign Up</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    font-family: 'Arial', sans-serif;
+  }
+
+  .card {
+    background-color: #fff;
+    border: none;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-header h2 {
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+
+  .form-control {
+    padding: 0.9rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+  }
+
+  .form-control::placeholder {
+    font-style: italic;
+    color: #888;
+  }
+
+  .form-control:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border-color: rgba(81, 203, 238, 1);
+  }
+
+  .btn-primary {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(90deg, #2575fc, #6a11cb);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .input-group-text {
+    border: none;
+    background-color: #eef2f7;
+    border-radius: 8px 0 0 8px;
+  }
+
+  .input-group-text i {
+    font-size: 1.2rem;
+    color: #6a11cb;
+  }
+
+  .card-footer a {
+    color: #2575fc;
+    text-decoration: underline;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .card-footer a:hover {
+    color: #6a11cb;
+  }
+</style>

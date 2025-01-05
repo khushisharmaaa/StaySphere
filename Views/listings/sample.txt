@@ -1,0 +1,49 @@
+<% layout("../layouts/boilerplate") -%>
+
+   <div class="row mt-3">
+      <div class="col-8 offset-3">
+         <h3 class="mb-3"> Listing Details</h3>
+      </div>
+
+         <div class="card col-6 offset-3 show-card">
+          <img src="<%= listing.image.url%>" class="card-img-top show-img" alt="listing_image">
+          <div class="card-body">
+            <p class="card-text">
+              <b><%= listing.title %></b>  <br> 
+              <%= listing.description %>  <br>
+              &#8377; <%= listing.price.toLocaleString("en-IN") %>  <br>
+              <%= listing.location %>   <br>
+              <%= listing.country %>
+            
+            
+            
+            </p> 
+          </div>
+        </div>
+         <br>
+         <div class="btns">
+            <a class="btn btn-dark col-1 offset-3 add-btn"  href="/listings/<%=listing.id%>/edit">Edit</a>
+         
+            <form  method="post" action="/listings/<%=listing._id%>?_method=DELETE">
+            
+               <Button class="btn btn-dark offset-4">Delete</Button>
+           
+           </form>
+         
+         </div>
+</div>
+
+
+
+
+
+
+
+
+<!--  toLocaleString bolkr ek function hota hai jo locality ke hisba se string mai convert kar deta hai ,,, agar let num=12345  par toLocaleString apply karenge by passing indian standard toh 12,345 aisi comma ke sath(India mai  Numbers/rupess/paiso ko jaise likhte hai waise ) String ban jayegi    
+For e.g num=4000 iss number par agar ye method lagaye like : 
+   num.toLocaleString("en-IN");  toh 4,000 ye string ban jayegi 
+
+   en-IN  ------ Indian Locality 
+
+-->
