@@ -27,8 +27,8 @@ const mongoose = require("mongoose");
 const dbUrl = process.env.ATLASDB_URL;
 main().then(()=>{
     console.log("Connected to DB");
-}).catch(()=>{
-    console.log("Some Error in DB");
+}).catch((err)=>{
+    console.log("Some Error in DB",err);
 });
 async function main() {
   await mongoose.connect(dbUrl);
@@ -138,11 +138,11 @@ const Review = require("./Models/review.js");
 const Listing = require("./Models/listing.js");  // ../Models/listing.js means Models folder ke andar jao & listing.js ko le aao 
 
 
-/*
+
 app.listen(8080 , ()=>{
     console.log("Server is Listening to Port 8080");
 });
-*/
+
 // Create Demo User 
 app.get("/demouser" , async (req,res)=>{
        let fakeUser = new User({
