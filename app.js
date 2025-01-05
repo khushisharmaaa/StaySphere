@@ -19,7 +19,7 @@ const User = require("./Models/user.js");
 const multer = require("multer");  // Hum new form ka data multipart form mai bhej rahe hai jo backend ko toh samaj nahi aayega   ,, toh usee parse karne ke liye taki backend ko samaj aaye , we will use a new functionility / Package named 'multer' , ye multer package form ke data se files ko nikalega & automatically unn files ko ek 'uploads' naam  ka folder banake usme store kar dega.
 const upload = multer({dest:'uploads/'}); // Isme hame batana padta hai ki , form se jo bhi files aayengi vo hum kaha pe save karwana chahte hai 
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT;
 
 
 //mongoose 
