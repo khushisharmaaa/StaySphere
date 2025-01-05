@@ -21,6 +21,24 @@ const upload = multer({dest:'uploads/'}); // Isme hame batana padta hai ki , for
 
 
 
+//mongoose 
+const mongoose = require("mongoose");
+// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const dbUrl = process.env.ATLASDB_URL;
+main().then(()=>{
+    console.log("Connected to DB");
+}).catch(()=>{
+    console.log("Some Error in DB");
+});
+async function main() {
+  await mongoose.connect(dbUrl);
+
+  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+}
+
+
+
+
 // Sessions ko Project mai add karna 
 const session = require("express-session");
 
@@ -111,22 +129,6 @@ app.set("viewengine" , "ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-
-
-//mongoose 
-const mongoose = require("mongoose");
-// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-const dbUrl = process.env.ATLASDB_URL;
-main().then(()=>{
-    console.log("Connected to DB");
-}).catch(()=>{
-    console.log("Some Error in DB");
-});
-async function main() {
-  await mongoose.connect(dbUrl);
-
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-}
 
 
 
