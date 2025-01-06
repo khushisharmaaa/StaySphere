@@ -32,7 +32,7 @@ main().then(()=>{
     console.log("Some Error in DB");
 });
 async function main() {
-  await mongoose.connect(dbUrl);
+  await mongoose.connect(dbUrl,{ useNewUrlParser: true, useUnifiedTopology: true });
 
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
@@ -106,6 +106,12 @@ next();
 
 
 
+app.listen(8080 , ()=>{
+    console.log("Server is Listening to Port 8080");
+});
+
+
+
 
 
 //method-override package
@@ -140,9 +146,6 @@ const Listing = require("./Models/listing.js");  // ../Models/listing.js means M
 
 
 
-app.listen(8080 , ()=>{
-    console.log("Server is Listening to Port 8080");
-});
 
 // Create Demo User 
 app.get("/demouser" , async (req,res)=>{
@@ -190,9 +193,6 @@ app.use("/listings/:id/reviews" , reviewRouter); // Jitne bhi reviews ke routes/
 //  ye jo 2 Lines hai upar wali , unme /listings  and  /listings/:id/reviews parent paths hai  & Router mai review.js , listing.js mai jo "/" , "/:reviewid" etc vo child paths hai.... toh aise jab bhi parent path mai koi parametre ho like yaha jaise  "/listings/:id/reviews" mai id hai ,, & vo callbacks mai use ho sakte hai ,  toh un parametres ko dusre files mai bhejne ke liye we have to set mergeParams:true; in the router object jaise yaha we have done  :  const router = express.Router({mergeParams:true});  kyuki reviews.js mai  reviews ke create route mai hame listing find krne ke liye id chahiye thi , jo yaha parent path mai present hai , toh ye waha jaye issliye mergeParams:true; kiya humne router mai.  
 
 app.use("/" , userRouter);
-
-
-
 
 
 
