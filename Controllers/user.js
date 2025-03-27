@@ -1,17 +1,16 @@
 const User = require("../Models/user");
 
-
-
 module.exports.renderSignUpForm = (req, res) => {
     res.render("../Views/Users/signup.ejs");
 }
+
 
 module.exports.signUp = async (req, res,next) => {
     try {
         let { username, email, password } = req.body;
         const newUser = new User({ email, username });
         const registeredUser = await User.register(newUser, password);
-        console.log(registeredUser);  
+        //console.log(registeredUser);  
         req.logIn(registeredUser , (err)=>{
         if(err){
             return next(err);
@@ -24,6 +23,7 @@ module.exports.signUp = async (req, res,next) => {
         res.redirect("/signup");
     }
 }
+
 
 module.exports.renderLoginForm = (req, res) => {
     res.render("../Views/Users/login.ejs");
@@ -38,7 +38,7 @@ module.exports.logIn = async (req, res) => {
   if(res.locals.redirectUrl){
   res.redirect(res.locals.redirectUrl);
 }else{
-    res.redirect("/listings");
+    res.redirect("/listings"); 
 }
 }
 
@@ -50,4 +50,4 @@ module.exports.logOut = (req,res,next)=>{
     req.flash("success","You are Logged out!");
     res.redirect("/listings");
 })
-}; 
+};  

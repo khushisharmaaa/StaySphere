@@ -35,7 +35,6 @@ router.delete("/:reviewId" , isLoggedIn , isReviewAuthor ,  wrapAsync (destroyRe
 /*
 Mongo $pull operator : 
 $pull    --> The $pull Operator removes from an existing array all instances of a value or values that match a specified condition 
- 
 */
     
  module.exports = router;

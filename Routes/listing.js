@@ -4,6 +4,7 @@ const wrapAsync = require("../Utils/wrapAsync.js");
 // const { listingSchema , reviewSchema } = require("../Schema.js");  middleware.js mai daal diya 
 // const ExpressError = require("../Utils/ExpressError.js");  middleware.js mai daal diya 
 //const Listing = require("../Models/listing.js");  // ../Models/listing.js means Models folder ke andar jao & listing.js ko le aao 
+
 const {isLoggedIn, isOwner, validateListing} = require("../Utils/middleware.js");
 const {index, renderNewForm, showListing, createListing, renderEditForm, editListing,destroyListing} = require("../Controllers/listings.js");
 
@@ -19,7 +20,7 @@ const upload = multer({storage});
 const validateListing = (req,res,next) =>{
     let {error} = listingSchema.validate(req.body);
     if(error) {
-       
+        
         let errMsg = error.details.map((el) => el.message).join(",");  // For additional Details  , agar error ke sath aut bhi details aa rhi hai , sb comma se seperate hoke print ho jayegi iss Line -> error.details.map((el) => el.message).join(",");  se.  
         throw new ExpressError(400 , error);
     }else{

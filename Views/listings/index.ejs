@@ -132,6 +132,7 @@
 
  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">      <!--is row-cols-lg-3 ka mtlb hai ki , ek row mai jitne bhi columns(cols) hai on a large size (lg) screen  , max 3 cards dikhao , te iss line ka mtlb hai -->
 
+ 
       <%  for(let listing of alllistings){  %>
         <a href="/listings/<%=listing.id%>" class="listing-link">   <div class="card col listing-card" >               <!--yaha img ko height bhi de denge taki sare cards mai images same size ki ho -->
          <img src="<%=listing.image.url%>" class="card-img-top" alt="listing_image" style="height: 20rem;" />      <!--Yaha Card ko anchor tag ke andar dal denge taki uspe click krne pr show.ejs page pr ja paye -->
@@ -140,7 +141,9 @@
                  <p class="card-text"> <b><%=listing.title%></b>   <br>
                                  <% if (listing.price != null) { %>
                                   &#8377 <%= listing.price.toLocaleString("en-IN") %> / night
-                                    <i class="tax-info" >&nbsp;&nbsp;+18% GST</i>
+                                    <i<!-- ... -->
+                                    
+                                     class="tax-info" >&nbsp;&nbsp;+18% GST</i>
                                 <% } else { %>
                                   Price not available
                                 <% } %>  

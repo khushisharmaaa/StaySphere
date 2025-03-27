@@ -10,9 +10,9 @@ const ExpressError = require("./ExpressError.js");
 // This middleware is for Authentication ,, check karega whether the user is logged in or not 
 module.exports.isLoggedIn = (req,res,next)=>{
     
-    if(!req.isAuthenticated()){  // this isAuthenticated() check whether the user is logged in or not , returns true if loggedin and false if not loggedOut
+    if(!req.isAuthenticated()){  // this isAuthenticated() check whether the user is logged in or not , returns true if loggedin and false if not loggedin
 
-        req.session.redirectUrl = req.originalUrl;   // ye req.originalUrl vo URL dega jispe hame jana tha ,, ye hum req.session mai redirectUrl variable banake usme store kar rahe hai by this line ,, taki fir kisi bhi middleware mai hum usee(redirectUrl ko) use kar sake ,, kyuki har middleware ke pass session ka access toh hota hi haii by using req.session. -------------  Ye chij hum kar rahe hai taki , manlo user loggedin nahi hai , he clicks on Add new listing , login page khul jaega , user ke login karne pr hum sidha add new listing page pr challe jaye , naa ki all listings pr ,,, issliye hum originalUrl store krkr rkh rahe , iss originalUrl mai addnewListing ka path hoga (mtlb jaha jate hue roka gaya tha login krne ke liye ) 
+        req.session.redirectUrl = req.originalUrl;  // ye req.originalUrl vo URL dega jispe hame jana tha ,, ye hum req.session mai redirectUrl variable banake usme store kar rahe hai by this line ,, taki fir kisi bhi middleware mai hum usee(redirectUrl ko) use kar sake ,, kyuki har middleware ke pass session ka access toh hota hi haii by using req.session. -------------  Ye chij hum kar rahe hai taki , manlo user loggedin nahi hai , he clicks on Add new listing , login page khul jaega , user ke login karne pr hum sidha add new listing page pr challe jaye , naa ki all listings pr ,,, issliye hum originalUrl store krkr rkh rahe , iss originalUrl mai addnewListing ka path hoga (mtlb jaha jate hue roka gaya tha login krne ke liye ) 
         req.flash("error" , "You must be logged in !");
         return res.redirect("/login");
     } 
@@ -41,7 +41,7 @@ module.exports.isOwner = async (req,res,next) =>{         // Ye function check  
         req.flash("error" , "You are not the Owner of this Listing");
         return  res.redirect(`/listings/${id}`);
     }
-    next();
+    next(); 
 };
 
 
@@ -53,7 +53,7 @@ module.exports.validateListing = (req,res,next) =>{
     if(error) {
        
         let errMsg = error.details.map((el) => el.message).join(",");  // For additional Details  , agar error ke sath aut bhi details aa rhi hai , sb comma se seperate hoke print ho jayegi iss Line -> error.details.map((el) => el.message).join(",");  se.  
-        throw new ExpressError(400 , error);
+        throw new ExpressError(400 , errMsg);
     }else{
         next();
     }
@@ -87,5 +87,5 @@ if( !(req.user && review.author.equals(req.user._id)) ) {
 req.flash("error" , "You are not the author of this Review");
 return res.redirect(`/listings/${id}`);
 }
-next();
+next();   
 };

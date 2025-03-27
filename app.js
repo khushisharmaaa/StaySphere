@@ -6,12 +6,18 @@ require('dotenv').config();
 
 const express = require("express");
 const app=express();
+
+
 const wrapAsync = require("./Utils/wrapAsync.js");
 const { listingSchema , reviewSchema } = require("./Schema.js");
 const ExpressError = require("./Utils/ExpressError.js");
+
+//Route files ko import kr rhe h app.js mein
 const listingRouter = require("./Routes/listing.js");
 const reviewRouter = require("./Routes/reviews.js");
 const userRouter = require("./Routes/user.js");
+
+
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./Models/user.js");
@@ -185,9 +191,27 @@ app.get("/testListing" , async (req,res)=>{
 });
 */
 
+// ...
+
+// Search functionality
+app.get('/search', (req, res) => {
+    const query = req.query.q;
+    const listings = sampleListings.filter(listing => {
+      const title = listing.title.toLowerCase();
+      const description = listing.description.toLowerCase();
+      const location = listing.location.toLowerCase();
+      return title.includes(query.toLowerCase()) || description.includes(query.toLowerCase()) || location.includes(query.toLowerCase());
+    });
+    res.render('listings/index', { listings });
+  });
+  
+  // ...
+
 
 app.use("/listings" , listingRouter );   // Jitne bhi listings ke routes/requests the , uski jagah pr bas ye ek single line we have written ,,, by restructuring the app.js file. 
-app.use("/listings/:id/reviews" , reviewRouter); // Jitne bhi reviews ke routes/requests the , uski jagah pr bas ye ek single line we have written ,,, by restructuring the app.js file.
+
+app.use("/listings/:id/reviews" , reviewRouter); 
+// Jitne bhi reviews ke routes/requests the , uski jagah pr bas ye ek single line we have written ,,, by restructuring the app.js file.
 // ye jo reviews ke case mai /listings/:id/reviews likha hai usme se id yahi app.js mai reh jati hai , vo dusri jagah nhi pohoch pati issliye Routes/reviews.js mai jab hum listing dhund rhe hote hai in router.post mai tb listing mil hi nhi pati , kyuki waha id pohochi hi nahi & we r tring to do findById toh listing undefined aayegi , jisse hum naya review add hi nahi kar payenge kyuki error aa jaygea--> "cannot read properties of null(readings reviews) "  ,,,,,,,,,,,,, toh aisa na ho & ye id pohoche reviews.js mai bhi so we use a external option mergeParams 
 
 //  ye jo 2 Lines hai upar wali , unme /listings  and  /listings/:id/reviews parent paths hai  & Router mai review.js , listing.js mai jo "/" , "/:reviewid" etc vo child paths hai.... toh aise jab bhi parent path mai koi parametre ho like yaha jaise  "/listings/:id/reviews" mai id hai ,, & vo callbacks mai use ho sakte hai ,  toh un parametres ko dusre files mai bhejne ke liye we have to set mergeParams:true; in the router object jaise yaha we have done  :  const router = express.Router({mergeParams:true});  kyuki reviews.js mai  reviews ke create route mai hame listing find krne ke liye id chahiye thi , jo yaha parent path mai present hai , toh ye waha jaye issliye mergeParams:true; kiya humne router mai.  
@@ -197,7 +221,7 @@ app.use("/" , userRouter);
 
 
 // Different Error handlers : 
-
+//GLOBAL error handler
 app.use((err , req , res , next)=>{
     let {statusCode=500 , message="Something Went Wrong"} = err;
     res.render("./listings/error.ejs",{err});

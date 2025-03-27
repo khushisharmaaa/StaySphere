@@ -13,7 +13,7 @@ module.exports.renderNewForm = (req,res)=>{          // Iss new route ko agar hu
  }
 
  module.exports.showListing = async (req,res)=>{
-         let {id}=req.params;
+         let {id}=req.params; //this id is listing id
          let listing = await Listing.findById(id)
          .populate({
              path: "reviews",
@@ -23,18 +23,18 @@ module.exports.renderNewForm = (req,res)=>{          // Iss new route ko agar hu
          })
           .populate("owner"); // agar reviews ke authors ka naam unpe print karana hai , toh reviews ke authors ko bhi populaate karana padega  , So we will use nested populate.
        //   listing.reviews.map((el)=>console.log(el.owner._id));
-        //   if(req.user) {console.log(req.user._id);  }
+        //   if(req.user) {console.log(req.user._id);  } 
          if(!listing){
              req.flash("error" , "Requested Listing does not exist" );
              res.redirect("/listings");
          }
-         res.render("./listings/show.ejs" , {listing});
+         res.render("./listings/show.ejs" , {listing});  
   }
 
 
 module.exports.createListing = async(req,res,next)=>{
 
-let url = req.file.path;
+let url = req.file.path;    
 let filename = req.file.filename;
 //console.log(url , " " , filename);
 
@@ -81,19 +81,19 @@ let filename = req.file.filename;
 
 
  module.exports.renderEditForm = async(req,res)=>{
-         let {id}=req.params;
+         let {id}=req.params; 
          let listing =await  Listing.findById(id);
- 
+
          if(!listing){
              req.flash("error" , "Requested Listing does not exist" );
              res.redirect("/listings");
          }
-        let originalImageUrl = listing.image.url;
+        let originalImageUrl = listing.image.url;  
         originalImageUrl=originalImageUrl.replace("/upload" , "/upload/w_250");
         res.render("./listings/edit.ejs" , {listing , originalImageUrl});
   }
 
-    
+
 
   module.exports.editListing = async(req,res)=>{
     let {id}=req.params;
@@ -131,28 +131,26 @@ let filename = req.file.filename;
         }
 
       */ 
-
+                                       
       let listing = await Listing.findByIdAndUpdate(id , {...req.body.listing});
   
-      if(typeof req.file !== "undefined") {       // agar humne edit form mai image upload kari ho tabhiii req.file mai kuch hoga , ow vo undefined hoga . 
+      if(typeof req.file !== "undefined") {       // agar humne edit form mai image upload kari ho tabhiii req.file mai kuch hoga , ow vo undefined hoga .   
       let url = req.file.path;
       let filename = req.file.filename;
   
       listing.image = {url , filename};
-      await listing.save();
+      await listing.save();   
     }
        req.flash("success" , "Listing Updated!");
        res.redirect(`/listings/${id}`);
-
 }
 
 
 module.exports.destroyListing = async (req,res,next)=>{
     let {id}=req.params;
 
-    let listing = await Listing.findById(id);
-
-   
+    //let listing = await Listing.findById(id);
+    
 
 await Listing.findByIdAndDelete(id);
 req.flash("success","Listing Deleted!");
