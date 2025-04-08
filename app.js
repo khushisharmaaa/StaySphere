@@ -18,10 +18,6 @@ const reviewRouter = require("./Routes/reviews.js");
 const userRouter = require("./Routes/user.js");
 
 
-const passport = require("passport");
-const LocalStrategy = require("passport-local");
-const User = require("./Models/user.js");
-
 const multer = require("multer");  // Hum new form ka data multipart form mai bhej rahe hai jo backend ko toh samaj nahi aayega   ,, toh usee parse karne ke liye taki backend ko samaj aaye , we will use a new functionility / Package named 'multer' , ye multer package form ke data se files ko nikalega & automatically unn files ko ek 'uploads' naam  ka folder banake usme store kar dega.
 const upload = multer({dest:'uploads/'}); // Isme hame batana padta hai ki , form se jo bhi files aayengi vo hum kaha pe save karwana chahte hai 
 
@@ -81,7 +77,9 @@ app.use(session(sessionOptions));
 
 
 
-
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./Models/user.js");
 // ppassport session ko bhi use karta hai , thats why usko hum session & flash ke baad likhenge 
 
 // passport.initialize()
@@ -150,7 +148,7 @@ app.use(express.json());
 const Review = require("./Models/review.js");
 const Listing = require("./Models/listing.js");  // ../Models/listing.js means Models folder ke andar jao & listing.js ko le aao 
 
-
+1
 
 
 // Create Demo User 
